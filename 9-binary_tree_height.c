@@ -9,7 +9,7 @@
  *
  * Return: maximum number
  */
-int max(size_t num1, size_t num2)
+size_t max(size_t num1, size_t num2)
 {
 	if (num1 > num2)
 		return (num1);
