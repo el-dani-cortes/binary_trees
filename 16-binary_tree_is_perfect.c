@@ -38,53 +38,41 @@ size_t binary_tree_height(const binary_tree_t *tree)
 	height = max(h_left, h_right);
 	return (height);
 }
-
-
 /**
- * binary_tree_height - Measures the height of a binary tree
+ * binary_tree_size - Measures the size of a binary tree
  * @tree: pointer to the root node
  *
- * Return: balance type size_t
+ * Return: Always nothing
  */
-
-int binary_tree_balance(const binary_tree_t *tree)
+size_t binary_tree_size(const binary_tree_t *tree)
 {
-	int h_left = 0, h_right = 0, height;
+	size_t h_left = 0, h_right = 0, size = 0;
 
 	if (tree == NULL)
 		return (0);
 	if (tree->left != NULL)
-		h_left = binary_tree_height(tree->left) + 1;
+		h_left = binary_tree_size(tree->left);
 	if (tree->right != NULL)
-		h_right = binary_tree_height(tree->right) + 1;
-
-	height = h_left - h_right;
-	return (height);
+		h_right = binary_tree_size(tree->right);
+	size = h_left + h_right + 1;
+	return (size);
 }
-
 /**
- * binary_tree_is_full - check if tree is full
- * @tree: pointer to tree
- *
- * Return: 1 if tree is full otherside 0
+ * u_pow - calculate power of a number
+ * @x: base number
+ * @y: exponent number
+ * Return: power of x
  */
-
-int binary_tree_is_full(const binary_tree_t *tree)
+size_t u_pow(size_t x, size_t y)
 {
-	if (tree == NULL)
+	size_t result = 1;
+
+	while (y > 0)
 	{
-		return (0);
+		result *= x;
+		y--;
 	}
-
-	if (tree->left == NULL && tree->right == NULL)
-		return (1);
-
-	if ((tree->left) && (tree->right))
-		return (binary_tree_is_full(tree->left) *
-			binary_tree_is_full(tree->right));
-
-	return (0);
-
+	return (result);
 }
 
 /**
@@ -96,11 +84,14 @@ int binary_tree_is_full(const binary_tree_t *tree)
 
 int binary_tree_is_perfect(const binary_tree_t *tree)
 {
-	int isFull, isBalance;
+	size_t n_spect, n_real, height;
 
-	isFull = binary_tree_is_full(tree);
-	isBalance = binary_tree_balance(tree);
-	if (isFull == 1 && isBalance == 0)
+	if (tree == NULL)
+		return (0);
+	height = binary_tree_height(tree);
+	n_spect = u_pow(2, height + 1) - 1;
+	n_real = binary_tree_size(tree);
+	if (n_spect == n_real)
 		return (1);
 	return (0);
 
