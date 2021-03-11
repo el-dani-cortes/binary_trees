@@ -11,36 +11,36 @@
  */
 bst_t *bst_insert(bst_t **tree, int value)
 {
-        bst_t *walk = NULL;
+	bst_t *walk = NULL;
 
-        walk = *tree;
-        if (walk == NULL)
-        {
-                *tree = binary_tree_node(NULL, value);
-                return (*tree);
-        }
-        while (walk != NULL)
-        {
-                if (walk->n > value)
-                {
-                        if (walk->left == NULL)
-                        {
-                                walk->left = binary_tree_node(walk, value);
-                                return (walk->left);
-                        }
-                        walk = walk->left;
-                }
-                else if (walk->n < value)
-                {
-                        if (walk->right == NULL)
-                        {
-                                walk->right = binary_tree_node(walk, value);
-                                return (walk->right);
-                        }
-                        walk = walk->right;
-                }
-                else if (walk->n == value)
-                        return (NULL);
-        }
-        return (NULL);
+	walk = *tree;
+	if (walk == NULL)
+	{
+		*tree = binary_tree_node(NULL, value);
+		return (*tree);
+	}
+	while (walk != NULL)
+	{
+		if (walk->n > value)
+		{
+			if (walk->left == NULL)
+			{
+				walk->left = binary_tree_node(walk, value);
+				return (walk->left);
+			}
+			walk = walk->left;
+		}
+		else if (walk->n < value)
+		{
+			if (walk->right == NULL)
+			{
+				walk->right = binary_tree_node(walk, value);
+				return (walk->right);
+			}
+			walk = walk->right;
+		}
+		else if (walk->n == value)
+			return (NULL);
+	}
+	return (NULL);
 }
