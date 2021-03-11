@@ -9,12 +9,13 @@
 
 int maxValue(const binary_tree_t *tree)
 {
+	int min_number = -32768;
 	int res;
 	int lres;
 	int rres;
 
 	if (tree == NULL)
-		return (-1000000);
+		return (min_number);
 	res = tree->n;
 	lres = maxValue(tree->left);
 	rres = maxValue(tree->right);
@@ -33,10 +34,11 @@ int maxValue(const binary_tree_t *tree)
  */
 int minValue(const binary_tree_t *tree)
 {
+	int max_number = 32767;
 	int rest, lres, rres;
 
 	if (tree == NULL)
-		return (1000000);
+		return (max_number);
 	rest = tree->n;
 	lres = minValue(tree->left);
 	rres = minValue(tree->right);
