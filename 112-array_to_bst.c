@@ -1,7 +1,29 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "binary_trees.h"
+/**
+ * walk - go through binary tree
+ * @temp: root of binary tree
+ * @new_node: new node
+ * Return: return pointer
+ *
+ */
+bst_t *walk(bst_t *temp, bst_t *new_node)
+{
+	bst_t *temp2 = NULL;
 
+	while (temp)
+	{
+		temp2 = temp;
+		if (new_node->n == temp->n)
+			break;
+		else if (new_node->n < temp->n)
+			temp = temp->left;
+		else
+			temp = temp->right;
+	}
+	return (temp2);
+}
 /**
  * array_to_bst - that builds a Binary Search tree
  * @array: is a pointer to the first element of the array
@@ -31,21 +53,11 @@ bst_t *array_to_bst(int *array, size_t size)
 		else
 		{
 			temp = trees;
-			while (temp)
-			{
-				temp2 = temp;
-				if (new_node->n == temp->n)
-					break;
-				else if (new_node->n < temp->n)
-					temp = temp->left;
-				else
-					temp = temp->right;
-			}
+			temp2 = walk(temp, new_node);
 			if (new_node->n == temp2->n)
 			{
 				free(new_node);
 				continue;
-
 			}
 			else if (temp2->n > new_node->n)
 			{
