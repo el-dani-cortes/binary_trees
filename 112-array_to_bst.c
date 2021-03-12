@@ -12,7 +12,7 @@
 
 bst_t *array_to_bst(int *array, size_t size)
 {
-	bst_t *trees = NULL, *temp, *temp2 = NULL, *new_node = NULL;
+	bst_t *trees = NULL, *temp = NULL, *temp2 = NULL, *new_node = NULL;
 	size_t i = 0;
 
 	for (i = 0; i < size; i++)
@@ -34,12 +34,20 @@ bst_t *array_to_bst(int *array, size_t size)
 			while (temp)
 			{
 				temp2 = temp;
-				if (new_node->n < temp->n)
+				if (new_node->n == temp->n)
+					break;
+				else if (new_node->n < temp->n)
 					temp = temp->left;
 				else
 					temp = temp->right;
 			}
-			if (temp2->n > new_node->n)
+			if (new_node->n == temp2->n)
+			{
+				free(new_node);
+				break;
+
+			}
+			else if (temp2->n > new_node->n)
 			{
 				temp2->left = new_node;
 				new_node->parent = temp2;
