@@ -44,7 +44,7 @@ bst_t *array_to_bst(int *array, size_t size)
 			if (new_node->n == temp2->n)
 			{
 				free(new_node);
-				break;
+				continue;
 
 			}
 			else if (temp2->n > new_node->n)
